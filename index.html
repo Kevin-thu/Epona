@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
+  <!-- Replace the content tag with appropriate information -->
+  <meta name="description" content="DESCRIPTION META TAG">
+  <meta property="og:title" content="SOCIAL MEDIA TITLE TAG"/>
+  <meta property="og:description" content="SOCIAL MEDIA DESCRIPTION TAG TAG"/>
+  <meta property="og:url" content="URL OF THE WEBSITE"/>
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
+  <meta property="og:image" content="static/image/your_banner_image.png" />
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+
+
+  <meta name="twitter:title" content="TWITTER BANNER TITLE META TAG">
+  <meta name="twitter:description" content="TWITTER BANNER DESCRIPTION META TAG">
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
+  <meta name="twitter:image" content="static/images/your_twitter_banner_image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- Keywords for your paper to be indexed by-->
+  <meta name="keywords" content="KEYWORDS SHOULD BE PLACED HERE">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <title>Epona: Autoregressive Diffusion World Model for Autonomous Driving</title>
+  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+  rel="stylesheet">
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
+</head>
+<body>
+
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title"><i>Epona</i> : Autoregressive Diffusion World Model for Autonomous Driving</h1>
+            <h1 class="is-size-3">ICCV 2025</h1>
+            <div class="is-size-5 publication-authors">
+              <!-- Paper authors -->
+              <span class="author-block">
+                <a href="https://kevin-thu.github.io/homepage/" target="_blank">Kaiwen Zhang</a><sup>1,2*</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://github.com/Tzy010822/" target="_blank">Zhenyu Tang</a><sup>1,3*</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://huxiaotaostasy.github.io/" target="_blank">Xiaotao Hu</a><sup>1,5</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://xingangpan.github.io/" target="_blank">Xingang Pan</a><sup>6</sup>,
+              </span><br>
+              <span class="author-block">
+                <a href="https://xy-guo.github.io/" target="_blank">Xiaoyang Guo</a><sup>1</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://liuyuan-pal.github.io/" target="_blank">Yuan Liu</a><sup>5</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=7eJBk1UAAAAJ&hl=zh-CN" target="_blank">Jingwei Huang</a><sup>7</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://yuanli2333.github.io/" target="_blank">Yuan Li</a><sup>3</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=pCY-bikAAAAJ&hl=en&oi=ao" target="_blank">Qian Zhang</a><sup>1</sup>,
+              </span><br>
+              <span class="author-block">
+                <a href="https://www.xxlong.site/" target="_blank">Xiaoxiao Long</a><sup>4✝</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://cite.nju.edu.cn/People/Faculty/20190621/i5054.html" target="_blank">Xun Cao</a><sup>4</sup>,
+              </span>
+              <span class="author-block">
+                <a href="http://yvanyin.net/" target="_blank">Wei Yin</a><sup>1§</sup>
+            </div>
+
+                  <div class="is-size-5 publication-authors">
+                    <span class="author-block"><sup>1</sup>Horizon Robotics   <sup>2</sup>Tsinghua University   <sup>3</sup>Peking University<br>  <sup>4</sup>Nanjing University  <sup>5</sup>The Hong Kong University of Science and Technology <br> <sup>6</sup>Nanyang Technological University <sup>7</sup>Tencent Hunyuan</span>
+                    <span class="eql-cntrb"><small><br><sup>*</sup>Equal Contribution   <sup>✝</sup>Project Advisor  <sup>§</sup>Corresponding Author</small></span>
+                  </div>
+
+                  <div class="column has-text-centered">
+                    <div class="publication-links">
+                         <!-- Arxiv PDF link -->
+                      <span class="link-block">
+                        <a href="" target="_blank"
+                        class="external-link button is-normal is-rounded is-dark">
+                        <span class="icon">
+                          <i class="fas fa-file-pdf"></i>
+                        </span>
+                        <span>Paper</span>
+                      </a>
+                    </span>
+
+                    <!-- Supplementary PDF link -->
+                    <!-- <span class="link-block">
+                      <a href="static/pdfs/supplementary_material.pdf" target="_blank"
+                      class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon">
+                        <i class="fas fa-file-pdf"></i>
+                      </span>
+                      <span>Supplementary</span>
+                    </a>
+                  </span> -->
+
+                <!-- ArXiv abstract Link -->
+                <span class="link-block">
+                  <a href="" target="_blank"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+                  <!-- Github link -->
+                  <span class="link-block">
+                    <a href="https://github.com/Kevin-thu/Epona" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code (Coming soon)</span>
+                  </a>
+                </span>
+                <!-- <span class="link-block">
+                  <a href="https://openxlab.org.cn/apps/detail/KaiwenZhang/DiffMorpher" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span>Web demo</span>
+                  </a>
+                </span> -->
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Teaser video-->
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <!-- <video poster="" id="tree" autoplay controls muted loop height="100%">
+        <source src="static/videos/banner_video.mp4"
+        type="video/mp4">
+      </video> -->
+      <img src="static/images/teaser.png" alt="">
+      <p class="has-text-centered">
+        <strong>Versatile capabilities of <i>Epona</i> :</strong> Given historical driving context, our <i>Epona</i> can generate consistent minutes-long future driving scenes at high resolution <strong>(A)</strong>. It can be controlled by diverse trajectories <strong>(B)</strong>, and understand real-world traffic knowledge <strong>(C)</strong>. In addition, our world model can predict future trajectories and serve as an end-to-end real-time motion planner <strong>(D)</strong>.
+      </p>
+    </div>
+  </div>
+</section>
+<!-- End teaser video -->
+
+<!-- Paper abstract -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Diffusion models have demonstrated exceptional visual quality in video generation, making them promising for autonomous driving world modeling. 
+            However, existing video diffusion-based world models struggle with flexible-length, long-horizon predictions and integrating trajectory planning.
+            This is because conventional video diffusion models rely on global joint distribution modeling of fixed-length frame sequences rather than sequentially constructing localized distributions at each timestep.
+            In this work, we propose <i>Epona</i>, an autoregressive diffusion world model that enables localized spatiotemporal distribution modeling through two key innovations: 
+            1) Decoupled spatiotemporal factorization that separates temporal dynamics modeling from fine-grained future world generation, 
+            and 2) Modular trajectory and video prediction that seamlessly integrate motion planning with visual modeling in an end-to-end framework.
+            Our architecture enables high-resolution, long-duration generation while introducing a novel chain-of-forward training strategy to address error accumulation in autoregressive loops.
+            Experimental results demonstrate state-of-the-art performance with 7.4% FVD improvement and minutes longer prediction duration compared to prior works. The learned world model further serves as a real-time motion planner, outperforming strong end-to-end planners on NAVSIM benchmarks.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End paper abstract -->
+
+<section class="section hero">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Method Overview</h2>
+        <div class="content has-text-justified">
+      <img src="static/images/Method.png" alt="">
+          <p><br>
+            Our world model utilizes a multimodal spatiotemporal transformer to
+            process the historical context of the first T frames and employs a next-frame prediction DiT to generate the frame at
+            T+1 and a trajectory planning DiT to forecast the future N-frame pose trajectory. By adopting a chain-of-forward
+            strategy, our approach enables high-quality and long-horizon video generation with an autoregressive manner.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- <section class="section hero">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Results</h2>
+        <div class="content has-text-justified"> -->
+          <!-- <h4>Animals</h4>
+          <div class="columns">
+            <div class="column">
+              <video poster="" id="" autoplay controls muted loop height="100%">
+                <source src="static/videos/cat_rabbit.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="column">
+              <video poster="" id="video1" autoplay controls muted loop height="100%">
+                <source src="static/videos/raccoon.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="column">
+              <video poster="" id="video1" autoplay controls muted loop height="100%">
+                <source src="static/videos/lion_tiger.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+          <h4>Art works</h4>
+          <div class="columns">
+            <div class="column">
+              <video poster="" id="video1" autoplay controls muted loop height="100%">
+                <source src="static/videos/van_pearl.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="column">
+              <video poster="" id="video1" autoplay controls muted loop height="100%">
+                <source src="static/videos/man_van.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="column">
+              <video poster="" id="video1" autoplay controls muted loop height="100%">
+                <source src="static/videos/sculp.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+          <h4>Human faces</h4>
+          <div class="columns">
+            <div class="column">
+              <video poster="" id="video1" autoplay controls muted loop height="100%">
+                <source src="static/videos/Trump_Biden.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="column">
+              <video poster="" id="video1" autoplay controls muted loop height="100%">
+                <source src="static/videos/Musk_Feifei.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="column">
+              <video poster="" id="video1" autoplay controls muted loop height="100%">
+                <source src="static/videos/taylor_yifei.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+          <h4>Buildings</h4>
+          <div class="columns">
+            <div class="column">
+              <video poster="" id="video1" autoplay controls muted loop height="100%">
+                <source src="static/videos/thu_mit.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="column">
+              <video poster="" id="video1" autoplay controls muted loop height="100%">
+                <source src="static/videos/house_right.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="column">
+              <video poster="" id="video1" autoplay controls muted loop height="100%">
+                <source src="static/videos/castle.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+          <h4>Other objects</h4>
+          <div class="columns">
+            <div class="column">
+              <video poster="" id="video1" autoplay controls muted loop height="100%">
+                <source src="static/videos/van_jeep.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="column">
+              <video poster="" id="video1" autoplay controls muted loop height="100%">
+                <source src="static/videos/chair03.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="column">
+              <video poster="" id="video1" autoplay controls muted loop height="100%">
+                <source src="static/videos/wave.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+          <h4>Animations</h4>
+          <div class="columns">
+            <div class="column">
+              <video poster="" id="video1" autoplay controls muted loop height="100%">
+                <source src="static/videos/dog_sit.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="column">
+              <video poster="" id="video1" autoplay controls muted loop height="100%">
+                <source src="static/videos/drag_sculp.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="column">
+              <video poster="" id="video1" autoplay controls muted loop height="100%">
+                <source src="static/videos/masa_oldman.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+<!-- Video carousel -->
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container is-max-desktop is-centered has-text-centered">
+      <h2 class="title is-3">Results</h2>
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-video1">
+          <video poster="" id="video1" autoplay controls muted loop height="100%">
+            <source src="static/videos/longvideo1.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-video2">
+          <video poster="" id="video2" autoplay controls muted loop height="100%">
+            <source src="static/videos/longvideo2.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-video3">
+          <video poster="" id="video3" autoplay controls muted loop height="100%">\
+            <source src="static/videos/longvideo3.mp4" type="video/mp4">
+          </video>
+        </div>
+        <!-- <div class="item item-video4">
+          <video poster="" id="video4" autoplay controls muted loop height="100%">
+            <source src="static/video_compare/chair03.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-video5">
+          <video poster="" id="video5" autoplay controls muted loop height="100%">
+            <source src="static/video_compare/dog_sit.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-video6">
+          <video poster="" id="video6" autoplay controls muted loop height="100%">
+            <source src="static/video_compare/fuji.mp4" type="video/mp4">
+          </video>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End video carousel -->
+
+<!-- Image carousel -->
+<!-- <section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+       <div class="item">
+        <img src="static/images/carousel1.jpg" alt="MY ALT TEXT"/>
+        <h2 class="subtitle has-text-centered">
+          First image description.
+        </h2>
+      </div>
+      <div class="item">
+        <img src="static/images/carousel2.jpg" alt="MY ALT TEXT"/>
+        <h2 class="subtitle has-text-centered">
+          Second image description.
+        </h2>
+      </div>
+      <div class="item">
+        <img src="static/images/carousel3.jpg" alt="MY ALT TEXT"/>
+        <h2 class="subtitle has-text-centered">
+         Third image description.
+       </h2>
+     </div>
+     <div class="item">
+      <img src="static/images/carousel4.jpg" alt="MY ALT TEXT"/>
+      <h2 class="subtitle has-text-centered">
+        Fourth image description.
+      </h2>
+    </div>
+  </div>
+</div>
+</div>
+</section> -->
+<!-- End image carousel -->
+
+
+
+
+<!-- Youtube video -->
+<!-- <section class="hero is-small is-light">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3">Video Presentation</h2>
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          
+          <div class="publication-video">
+            <iframe src="https://www.youtube.com/embed/JkaxUblCGz0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+<!-- End youtube video -->
+
+
+
+
+
+
+
+
+<!-- Paper poster -->
+<!-- <section class="hero is-small is-light">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title">Poster</h2>
+
+      <iframe  src="static/pdfs/sample.pdf" width="100%" height="550">
+          </iframe>
+        
+      </div>
+    </div>
+  </section> -->
+<!--End paper poster -->
+
+
+<!--BibTex citation -->
+  <!-- <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>
+      @article{zhang2023diffmorpher,
+        title={DiffMorpher: Unleashing the Capability of Diffusion Models for Image Morphing},
+        author={Zhang, Kaiwen and Zhou, Yifan and Xu, Xudong and Pan, Xingang and Dai, Bo},
+        journal={arXiv preprint arXiv:2312.07409},
+        year={2023}
+      }
+      </code></pre>
+    </div>
+</section> -->
+<!--End BibTex citation -->
+
+
+  <footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+
+          <p>
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+            You are free to borrow the of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Statcounter tracking code -->
+  
+<!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+
+    <!-- End of Statcounter Code -->
+
+  </body>
+  </html>
