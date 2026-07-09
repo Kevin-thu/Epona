@@ -39,7 +39,9 @@ def load_single_log_db_data(log_db_name="2021.05.12.22.28.35_veh-35_00620_01164"
         'CAM_B0':[],
         'data_root': img_root_path,
         }
-    seq_tmp = []
+    # 每个相机独立的 seq_tmp 和 pre_scene_token，避免不同相机交叉遍历时互相污染
+    seq_tmp_dict = {cam: [] for cam in cameras if cam != 'data_root'}
+    pre_scene_token_dict = {cam: None for cam in cameras if cam != 'data_root'}
 
     ego_pose = {
         'CAM_L2':{},
@@ -63,9 +65,10 @@ def load_single_log_db_data(log_db_name="2021.05.12.22.28.35_veh-35_00620_01164"
         'CAM_B0':{},
     }
 
-    pre_scene_token = None
     for idx, img_item in enumerate(images_data):
         camera_channel = img_item.camera.channel
+        if camera_channel not in seq_tmp_dict:
+            continue
         camera_intrinsic = img_item.camera.intrinsic
         img_name = os.path.basename(img_item.filename_jpg)
         loaded_db_name = img_item.filename_jpg.split('/')[0]
@@ -108,13 +111,23 @@ def load_single_log_db_data(log_db_name="2021.05.12.22.28.35_veh-35_00620_01164"
             'timestamp': curr_ego_pose_from_cam.timestamp,
         }
 
-        if (scene_token != pre_scene_token) and (pre_scene_token is not None):
+        # 使用当前相机独立的状态进行 Scene 切分
+        curr_seq_tmp = seq_tmp_dict[camera_channel]
+        curr_pre_scene = pre_scene_token_dict[camera_channel]
+
+        if (scene_token != curr_pre_scene) and (curr_pre_scene is not None):
             print(f'idx: {idx}, scene_token:{scene_token}, next_token:{next_img_token}, {camera_channel}, img_path:{img_item.filename_jpg}')
-            cameras[camera_channel].append({'seq': seq_tmp, 'scene': pre_scene_token})
-            seq_tmp = [img_name, ]
+            cameras[camera_channel].append({'seq': curr_seq_tmp, 'scene': curr_pre_scene})
+            seq_tmp_dict[camera_channel] = [img_name, ]
         else:
-            seq_tmp.append(img_name)
-        pre_scene_token = scene_token
+            seq_tmp_dict[camera_channel].append(img_name)
+        pre_scene_token_dict[camera_channel] = scene_token
+
+    # 循环结束后，把每个相机最后一段序列加进去（原代码漏了这步，每个相机丢失最后一个 scene）
+    for cam in seq_tmp_dict:
+        if seq_tmp_dict[cam]:
+            cameras[cam].append({'seq': seq_tmp_dict[cam], 'scene': pre_scene_token_dict[cam]})
+
     return cameras, ego_pose
 
 def loop_over_db_files(
@@ -132,6 +145,8 @@ def loop_over_db_files(
         if db_i not in sensor_data_db_list:
             print(f"!!!! {db_i} donot exist in sensor data.")
             continue
+        # 每个 db 重置 total_sequence，防止跨 db 数据累加重复写入 JSON
+        total_sequence = []
         print(f">>>>Start {db_i}.")
         log_db = nuplandb_wrapper.get_log_db(db_i)
         print(log_db)
@@ -139,11 +154,17 @@ def loop_over_db_files(
         scene_num = len(cameras['CAM_F0'])
         for i in range(scene_num):
             new_seq_meta = {
-                    'CAM_F0': cameras['CAM_F0'][i]['seq'],
                     'scene': cameras['CAM_F0'][i]['scene'],
                     'data_root': cameras['data_root'],
                     'pose': f'ego_meta/{db_i}.json',
                 }
+            # 写入全部 8 个相机的序列
+            all_cams = ['CAM_L2', 'CAM_F0', 'CAM_R2', 'CAM_L0', 'CAM_L1', 'CAM_R0', 'CAM_R1', 'CAM_B0']
+            for cam in all_cams:
+                if i < len(cameras[cam]):
+                    new_seq_meta[cam] = cameras[cam][i]['seq']
+                else:
+                    new_seq_meta[cam] = []
             total_sequence.append(new_seq_meta)
         ego_meta_path = os.path.join(ego_save_dir, db_i+'.json')
         os.makedirs(os.path.dirname(ego_meta_path), exist_ok=True)
@@ -169,8 +190,8 @@ if __name__ == '__main__':
     num_processes = args.workers
     print('##############', split_id, split_num)
     split_name = 'train'
-    ego_save_dir = '' # your path here
-    seq_save_dir = '' # your path here
+    ego_save_dir = ''
+    seq_save_dir = ''
     db_list = valid_trainvaltest_dbs
     db_list.sort()
     split_db_list = db_list[split_id::split_num]
